@@ -1,16 +1,40 @@
-# React + Vite
+# Merx Energia – Registro de Consumo Mensal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Página web simples para registrar o consumo mensal de energia (kWh) dos clientes da Merx.
 
-Currently, two official plugins are available:
+## Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Cadastrar uma leitura (cliente, mês e consumo em kWh)
+- Listar as leituras cadastradas (com opção de remover)
+- Mostrar o consumo total de cada cliente
 
-## React Compiler
+## Tecnologias
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+React · JavaScript · Vite · CSS
 
-## Expanding the ESLint configuration
+Os dados ficam salvos no `localStorage` do navegador (não há backend).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Como rodar
+
+Pré-requisito: [Node.js](https://nodejs.org) 18 ou superior.
+
+```bash
+git clone https://github.com/victorsantos-dev01/merx-consumo-energia.git
+cd merx-consumo-energia
+npm install
+npm run dev
+```
+
+Abra o endereço exibido no terminal (normalmente http://localhost:5173).
+
+## Decisões
+
+- Sem backend, para manter o projeto simples.
+- Clientes com o mesmo nome (sem diferenciar maiúsculas/minúsculas) são somados juntos.
+
+## Melhorias futuras
+
+- API em Node.js com banco de dados
+- Filtro por cliente ou mês
+- Gráfico de evolução do consumo
+- Testes automatizados
