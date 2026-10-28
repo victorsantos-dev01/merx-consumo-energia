@@ -19,7 +19,13 @@ export default function ReadingForm({ onAdd }) {
       return;
     }
 
-    onAdd(cliente.trim(), mes, valor);
+    // O App responde se deu certo ou se a leitura é duplicada
+    const resultado = onAdd(cliente.trim(), mes, valor);
+    if (!resultado.ok) {
+      setErro(resultado.erro);
+      return;
+    }
+
     setCliente("");
     setMes("");
     setConsumo("");

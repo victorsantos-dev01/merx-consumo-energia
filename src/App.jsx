@@ -5,6 +5,11 @@ import TotalsByClient from "./components/TotalsByClient";
 
 const STORAGE_KEY = "merx-leituras";
 
+// Padroniza o nome para comparar: sem espaços nas pontas e em minúsculas
+function chaveCliente(nome) {
+  return nome.trim().toLowerCase();
+}
+
 function loadReadings() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -23,6 +28,17 @@ export default function App() {
   }, [readings]);
 
   function addReading(cliente, mes, consumoKwh) {
+    // Já existe leitura do mesmo cliente no mesmo mês?
+    const duplicada = readings.some(
+      (r) => chaveCliente(r.cliente) === chaveCliente(cliente) && r.mes === mes
+    );
+    if (duplicada) {
+      return {
+        ok: false,
+        erro: "Já existe uma leitura deste cliente para este mês.",
+      };
+    }
+
     const nova = {
       id: crypto.randomUUID(),
       cliente,
@@ -30,6 +46,7 @@ export default function App() {
       consumoKwh,
     };
     setReadings((prev) => [nova, ...prev]);
+    return { ok: true };
   }
 
   function removeReading(id) {
@@ -41,7 +58,7 @@ export default function App() {
     const map = new Map();
 
     for (const r of readings) {
-      const chave = r.cliente.trim().toLowerCase();
+      const chave = chaveCliente(r.cliente);
       const atual = map.get(chave);
       if (atual) {
         atual.totalKwh += r.consumoKwh;
