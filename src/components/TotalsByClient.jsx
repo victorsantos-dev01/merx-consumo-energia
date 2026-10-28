@@ -1,4 +1,8 @@
 export default function TotalsByClient({ totals }) {
+  // Soma de todos os clientes
+  const totalGeral = totals.reduce((soma, t) => soma + t.totalKwh, 0);
+  const totalLeituras = totals.reduce((soma, t) => soma + t.leituras, 0);
+
   return (
     <section className="card">
       <h2>Consumo total por cliente</h2>
@@ -25,6 +29,13 @@ export default function TotalsByClient({ totals }) {
               </tr>
             ))}
           </tbody>
+          <tfoot>
+            <tr>
+              <td>Total geral</td>
+              <td>{totalLeituras}</td>
+              <td>{totalGeral.toLocaleString("pt-BR")}</td>
+            </tr>
+          </tfoot>
         </table>
       )}
     </section>

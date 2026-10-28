@@ -121,3 +121,9 @@ th {
   font-size: 0.9rem;
   text-align: center;
 }
+
+tfoot td {
+  font-weight: 700;
+  border-top: 2px solid #d1d5db;
+  border-bottom: none;
+}
